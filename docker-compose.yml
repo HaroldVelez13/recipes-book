@@ -1,0 +1,71 @@
+version: "3"
+
+services:
+    domain:
+        depends_on:
+            - postgres
+        build:
+            context: ./domain
+            dockerfile: Dockerfile
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./domain/:/src/domain/
+            - /src/domain/node_modules
+        command: yarn start:dev
+        env_file:
+            - ./domain/.env
+        networks:
+            - network-recipes-book
+
+    app:
+        build: 
+            context: ./ui/app
+            dockerfile: Dockerfile
+        depends_on:
+            - domain
+        ports:
+            - "19000:19000"        
+        volumes:
+            - ./app/:/src/app/
+            - /src/app/node_modules
+        command: expo start
+        env_file:
+            - ./app/.env
+        networks:
+            - network-recipes-book
+    
+        # website:
+    #     build: 
+    #         context: ./ui/website
+    #         dockerfile: Dockerfile
+    #     depends_on:
+    #         - domain
+    #     ports:
+    #         - "4200:4200"        
+    #     volumes:
+    #         - ./website/:/src/website/
+    #         - /src/website/node_modules
+    #     command: yarn start:dev 
+    #     env_file:
+    #         - ./website/.env
+    #     networks:
+    #         - network-recipes-book
+
+    postgres:
+        image: postgres:10.4
+        volumes: 
+            - "./data-db:/data/db"
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_USER: rb_local
+            POSTGRES_PASSWORD: rb_local
+            POSTGRES_DB: rb_test
+        networks:
+            - network-recipes-book
+      
+
+networks:
+    network-recipes-book:
+        driver: bridge

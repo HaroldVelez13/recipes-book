@@ -1,0 +1,166 @@
+<nz-layout style="height: 100vh">
+  <nz-header
+    style="color: white; padding:0; display: flex; align-items: center; justify-content: space-between;"
+  >
+    <div>
+      <i
+        nz-icon
+        class="trigger"
+        [type]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        (click)="toggleSideBar()"
+      ></i>
+      <span class="brand" [routerLink]="['/']">NestJS Blog</span>
+    </div>
+
+    <div style="display: flex; align-items: center">
+      <i nz-icon type="home" style="font-size: 1.3rem" [routerLink]="['/']"></i>
+      <span style="width: 1rem"></span>
+      <i nz-icon type="info-circle" style="font-size: 1.3rem" [routerLink]="['/info']"></i>
+      <!-- ! user panel -->
+      <div
+        class="user-panel"
+        nz-popover
+        nzTrigger="hover"
+        [nzContent]="userPanelPopOverTemplate"
+        *ngIf="isLoggedIn$ | async; else registerTemplate"
+      >
+        <p style="line-height: initial; padding-right: 1rem;">
+          <span class="user-panel-name">{{ (user$ | async).firstname }}</span>
+          <span class="user-panel-email">{{ (user$ | async).email }}</span>
+        </p>
+        <nz-badge nzDot>
+          <nz-avatar
+            nzShape="square"
+            nzText="{{ (user$ | async).firstname[0] + (user$ | async).lastname[0] }}"
+            nzSrc="{{ (user$ | async).avatar }}"
+          ></nz-avatar>
+        </nz-badge>
+        <ng-template #userPanelPopOverTemplate>
+          <div style="padding: 1rem 0">
+            <a [routerLink]="['/my/profile']">
+              <i nz-icon nzType="user"></i>
+              &nbsp; My account
+            </a>
+            <nz-divider></nz-divider>
+            <a [routerLink]="['/auth/logout']">
+              <i nz-icon nzType="logout"></i>
+              &nbsp; Log out
+            </a>
+          </div>
+        </ng-template>
+      </div>
+      <ng-template #registerTemplate>
+        <div style="line-height: 64px; padding:0 1rem; cursor: pointer;" [routerLink]="['/auth']">
+          <!-- ! if not logged in -->
+          <span>My account</span>
+        </div>
+      </ng-template>
+    </div>
+  </nz-header>
+
+  <!-- ! side list -->
+  <nz-layout>
+    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null" nzTheme="light">
+      <ul
+        nz-menu
+        nzMode="inline"
+        [nzSelectable]="false"
+        [nzInlineCollapsed]="isCollapsed"
+        style="height: 100%; border: 0; overflow-y: auto; overflow-x: hidden"
+      >
+        <ng-container *ngIf="isLoggedIn$ | async">
+          <li nz-submenu *ngIf="(user$ | async).isAdmin">
+            <span title>
+              <i nz-icon nzType="setting"></i>
+              <span class="nav-text">Admin space</span>
+            </span>
+            <ul>
+              <li nz-menu-item [routerLink]="['/admin']">
+                Categories
+              </li>
+              <li nz-menu-item [routerLink]="['/admin/users']">
+                Users
+              </li>
+            </ul>
+          </li>
+          <li nz-menu-item [routerLink]="['/creator']" *ngIf="(user$ | async).isAuthor">
+            <span title>
+              <i nz-icon nzType="edit"></i>
+              <span class="nav-text">Author space</span>
+            </span>
+          </li>
+        </ng-container>
+
+        <li nz-menu-item [routerLink]="['/']">
+          <span title>
+            <i nz-icon nzType="font-colors"></i>
+            <span class="nav-text">All articles</span>
+          </span>
+        </li>
+
+        <!-- ! categories -->
+        <li nz-submenu>
+          <span title>
+            <i nz-icon nzType="book"></i>
+            <span class="nav-text">Categories</span>
+          </span>
+          <ul *ngIf="categories$ | async as categories; else noCategoryTemplate">
+            <li
+              nz-menu-item
+              *ngFor="let item of categories"
+              routerLinkActive="active"
+              [routerLink]="['/article/list']"
+              [queryParams]="{ mode: 'category', id: item.id }"
+            >
+              {{ item?.title }}
+            </li>
+          </ul>
+          <ng-template #noCategoryTemplate>
+            <ul>
+              <li nz-menu-item>
+                No category available yet
+              </li>
+            </ul>
+          </ng-template>
+        </li>
+
+        <!-- ! authors -->
+        <li nz-submenu>
+          <span title>
+            <i nz-icon nzType="team"></i>
+            <span class="nav-text">Authors</span>
+          </span>
+          <ul *ngIf="authors$ | async as authors; else noauthorTemplate">
+            <li
+              nz-menu-item
+              *ngFor="let item of authors"
+              style="text-transform: capitalize"
+              routerLinkActive="active"
+              [routerLink]="['/article/list']"
+              [queryParams]="{ mode: 'author', id: item.id }"
+            >
+              {{ item?.firstname }} {{ item?.lastname }}
+            </li>
+          </ul>
+          <ng-template #noauthorTemplate>
+            <ul>
+              <li nz-menu-item>
+                No category available yet
+              </li>
+            </ul>
+          </ng-template>
+        </li>
+      </ul>
+    </nz-sider>
+
+    <nz-content class="content" id="content">
+      <nz-back-top nzTarget="nz-content"></nz-back-top>
+
+      <router-outlet></router-outlet>
+
+      <nz-footer>
+        <span (click)="goToLinkedIn()"> @ Mustapha AOUAS </span>
+      </nz-footer>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

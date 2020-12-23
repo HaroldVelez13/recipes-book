@@ -1,0 +1,26 @@
+<ng-container *ngIf="user && userForm">
+  <form nz-form [formGroup]="userForm" class="login-form" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5">Email</nz-form-label>
+      <nz-form-control [nzSpan]="19">
+        <input type="email" nz-input [value]="user.email" placeholder="Email" readonly />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5">Firstname</nz-form-label>
+      <nz-form-control [nzSpan]="19" [nzValidateStatus]="isInputError('firstname')">
+        <input type="text" nz-input formControlName="firstname" placeholder="Firstname" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5">Lastname</nz-form-label>
+      <nz-form-control [nzSpan]="19" [nzValidateStatus]="isInputError('lastname')">
+        <input type="text" nz-input formControlName="lastname" placeholder="Lastname" />
+      </nz-form-control>
+    </nz-form-item>
+    <br />
+    <div style="display: flex; justify-content: flex-end">
+      <button nz-button type="submit" nzType="primary" [nzLoading]="loading$ | async">Save</button>
+    </div>
+  </form>
+</ng-container>

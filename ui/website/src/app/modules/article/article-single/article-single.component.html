@@ -1,0 +1,18 @@
+<section class="page">
+  <div class="image-wrapper"></div>
+
+  <nz-page-header nzBackIcon [nzTitle]="(article$ | async)?.title" (nzBack)="onGoBack()">
+    <nz-breadcrumb nz-page-header-breadcrumb>
+      <nz-breadcrumb-item>
+        <a>Articles</a>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item>{{ article?.title }}</nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </nz-page-header>
+
+  <div class="article">
+    <div class="article-body" *ngIf="articleBody">
+      <app-display-article [blocks]="articleBody.blocks"></app-display-article>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,1301 @@
+{
+	"info": {
+		"_postman_id": "7f4c916a-aae7-466a-8fc1-43d7dfa82ce2",
+		"name": "recipe_book",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"test@email.com\",\n\t\"password\": \"secret\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"test\",\n\t\"email\": \"test@email.com\",\n\t\"password\": \"secret\",\n\t\"firstname\": \"mustapha\",\n\t\"lastname\": \"aouas\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/auth/signin",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"password\":\"mmmm\",\n\t\"password1\":\"mmmmm\",\n\t\"password2\":\"mmmm\"\n\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/auth/1/password",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"1",
+								"password"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/user",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get own info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/user/own",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"own"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"username\": \"muss\",\n    \"avatar\": \"\",\n    \"email\": \"mus@email.com\",\n    \"firstname\": \"mustapha\",\n    \"lastname\": \"aouas\",\n    \"isAuthor\": true\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/api/user/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get own recipes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNjA4MDc5MTMyLCJleHAiOjE2MDkzNzUxMzJ9.9rjooShsbwsnEWLtgG1jrvtxVSaR7M7l3ocAhFepAv82LREFv1BB7vc4P46mjnMZtXYx1n4LrStvYdzWL7wyPw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/user/own/recipes?page=1&take=10",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"own",
+								"recipes"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "take",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get own recipes count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/user/own/recipes/count",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"own",
+								"recipes",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete one user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiRoute}}/user/5",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"user",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11c0BlbWFpbC5jb20iLCJpYXQiOjE1NTcwMDk5NDQsImV4cCI6MTU1NzYxNDc0NH0.ylCmcNKKf4xlAfgn8IRIP1gFUSGW_Aq66lGAIj6Y3JtczS3vLD64zw_ZnJXdEZrovbBiOrIc4HZgz60lHGX9bg",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "34d72da2-ea89-449f-8b58-523e19dd5e8f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "cd8b60ef-fe86-4cfe-8e3a-661924ea046c",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "recipes",
+			"item": [
+				{
+					"name": "add recipe",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNjA4MDc5MTMyLCJleHAiOjE2MDkzNzUxMzJ9.9rjooShsbwsnEWLtgG1jrvtxVSaR7M7l3ocAhFepAv82LREFv1BB7vc4P46mjnMZtXYx1n4LrStvYdzWL7wyPw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n\t\"title\": \"Como vamos\",\t\n\t\"body\": \"Agregando typo de recetas\",\n\t\"categoryIds\": [1],\n    \"typeId\":1\n\t\n}"
+						},
+						"url": {
+							"raw": "{{apiRoute}}/recipe",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"recipe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all recipes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiRoute}}/recipe",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"recipe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update one recipe",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNjA4MDc5MTMyLCJleHAiOjE2MDkzNzUxMzJ9.9rjooShsbwsnEWLtgG1jrvtxVSaR7M7l3ocAhFepAv82LREFv1BB7vc4P46mjnMZtXYx1n4LrStvYdzWL7wyPw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":9,\n\t\"title\": \"2 recipe\",\t\n\t\"body\": \"exqample body one recipe Edited\",\t\n\t\"categoryIds\": [1],\n    \"typeId\":1\n\t\n}"
+						},
+						"url": {
+							"raw": "{{apiRoute}}/recipe/9",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"recipe",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete recipe",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiRoute}}/recipe/1",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"recipe",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get recipes count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiRoute}}/recipe/count",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"recipe",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get recipes count by category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiRoute}}/recipe/category/5/count",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"recipe",
+								"category",
+								"5",
+								"count"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11c0BlbWFpbC5jb20iLCJpYXQiOjE1NTcyMzI3NDEsImV4cCI6MTU1NzgzNzU0MX0.j3z1Dgi8nGyUU_PxmC2rTHgedYDFmWsDotODr1gI7xVQMmtTNALL3joxDcvyHGJGunvz9jrjGgzhVkg0PgOltA",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "81cdcfb7-52e8-4713-b857-e01bdd52c69d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "80135594-fc2b-4133-896f-8b0d25d3919f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "add comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"message\": \"helloooooooooo\"\n}"
+						},
+						"url": {
+							"raw": "{{apiRoute}}/recipe/6/comment/",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"recipe",
+								"6",
+								"comment",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiRoute}}/recipe/6/comment/",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"recipe",
+								"6",
+								"comment",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit one comment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"message\": \"poooooooower\"\n}"
+						},
+						"url": {
+							"raw": "{{apiRoute}}/recipe/0/comment/3",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"recipe",
+								"0",
+								"comment",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11c0BlbWFpbC5jb20iLCJpYXQiOjE1NTQ2NTMwNTQsImV4cCI6MTU1NTI1Nzg1NH0.VRSjAszYJpNrP4-SkZPY4uEIIgJEGP90dSRtxYB_yPwPdwwYGO4jEqyiFhCmoBbk0Rfe3IGBauSrUqbHltCoXQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1e6c2d2d-37d8-469b-9ad3-fc74afc394b2",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "9362cbba-e399-4812-ae20-7fc4737cb321",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Steps",
+			"item": [
+				{
+					"name": "add step",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Step Title\",\n    \"body\":\"Step example body\",\n    \"timeReference\":null\n}"
+						},
+						"url": {
+							"raw": "{{apiRoute}}/recipe/6/step/",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"recipe",
+								"6",
+								"step",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all steps",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiRoute}}/recipe/1/step/",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"recipe",
+								"1",
+								"step",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit one step",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"message\": \"poooooooower\"\n}"
+						},
+						"url": {
+							"raw": "{{apiRoute}}/recipe/1/step/3",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"recipe",
+								"1",
+								"step",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11c0BlbWFpbC5jb20iLCJpYXQiOjE1NTQ2NTMwNTQsImV4cCI6MTU1NTI1Nzg1NH0.VRSjAszYJpNrP4-SkZPY4uEIIgJEGP90dSRtxYB_yPwPdwwYGO4jEqyiFhCmoBbk0Rfe3IGBauSrUqbHltCoXQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0dae9a7a-d66a-4801-bf8e-fc3304499964",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "282d7f8b-11a6-4d98-9708-22006cfea29d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "categories",
+			"item": [
+				{
+					"name": "add categoriy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNjA4MDc1NDg4LCJleHAiOjE2MDkzNzE0ODh9.rjcjmyz0idQOked8Imqj3Oxm3J39NyZxHy727C982-qad_uOdeNXWY3ZODplTAFLdhpPGZ8FizRkxxU6yjPG3A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Sopas\"\n}"
+						},
+						"url": {
+							"raw": "{{apiRoute}}/category",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiRoute}}/category",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiRoute}}/category/1",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit category",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Angular\",\n\t\"body\": \"All Angular related topics\"\n}"
+						},
+						"url": {
+							"raw": "{{apiRoute}}/category/5",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"category",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiRoute}}/category/5",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"category",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11c0BlbWFpbC5jb20iLCJpYXQiOjE1NTcxNDI1MjksImV4cCI6MTU1Nzc0NzMyOX0.ZdSMhvFkA7wJ2yzJI1SQTLng9-iIrWBgP8GVWyJ7c5mvpk8-CpG3_RoVUG2HAILrGqZhz66a7bKNLwxcd9B6yg",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f0ff3e3f-0e86-478c-b519-faaf7e106ad2",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "96d87ffc-f15a-4ca3-9fc7-47c6cf35de38",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ingredients",
+			"item": [
+				{
+					"name": "add ingredient",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNjA4MDc1NDg4LCJleHAiOjE2MDkzNzE0ODh9.rjcjmyz0idQOked8Imqj3Oxm3J39NyZxHy727C982-qad_uOdeNXWY3ZODplTAFLdhpPGZ8FizRkxxU6yjPG3A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"papa\",\n    \"quantity\":\"2\",\n    \"unit\":\"unidad\",\n    \"iconName\":\"example\",\n    \"iconType\":\"example\"\n\n}"
+						},
+						"url": {
+							"raw": "{{apiRoute}}/ingredient",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"ingredient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all ingredients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiRoute}}/ingredient",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"ingredient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one ingredient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiRoute}}/ingredient/2",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"ingredient",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit ingredient",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNjA4MDc5MTMyLCJleHAiOjE2MDkzNzUxMzJ9.9rjooShsbwsnEWLtgG1jrvtxVSaR7M7l3ocAhFepAv82LREFv1BB7vc4P46mjnMZtXYx1n4LrStvYdzWL7wyPw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":2,\n\t\"name\": \"papa\",\n    \"quantity\":\"2\",\n    \"unit\":\"unidad\",\n    \"iconName\":\"example\",\n    \"iconType\":\"example\"\n}\n"
+						},
+						"url": {
+							"raw": "{{apiRoute}}/ingredient/2",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"ingredient",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete ingredient",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNjA4MDc5MTMyLCJleHAiOjE2MDkzNzUxMzJ9.9rjooShsbwsnEWLtgG1jrvtxVSaR7M7l3ocAhFepAv82LREFv1BB7vc4P46mjnMZtXYx1n4LrStvYdzWL7wyPw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiRoute}}/ingredient/5",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"ingredient",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11c0BlbWFpbC5jb20iLCJpYXQiOjE1NTcxNDI1MjksImV4cCI6MTU1Nzc0NzMyOX0.ZdSMhvFkA7wJ2yzJI1SQTLng9-iIrWBgP8GVWyJ7c5mvpk8-CpG3_RoVUG2HAILrGqZhz66a7bKNLwxcd9B6yg",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "6eab0f75-4400-4461-ba42-988c2ade5e50",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "13f4298c-4ac5-4f2c-a54c-2b3079ca2c0a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "types",
+			"item": [
+				{
+					"name": "add type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNjA4MDc1NDg4LCJleHAiOjE2MDkzNzE0ODh9.rjcjmyz0idQOked8Imqj3Oxm3J39NyZxHy727C982-qad_uOdeNXWY3ZODplTAFLdhpPGZ8FizRkxxU6yjPG3A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"First Type\",\n    \"iconType\":\"exmaple\",\n    \"iconName\":\"example\"\n}"
+						},
+						"url": {
+							"raw": "{{apiRoute}}/type",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNjA4MDc5MTMyLCJleHAiOjE2MDkzNzUxMzJ9.9rjooShsbwsnEWLtgG1jrvtxVSaR7M7l3ocAhFepAv82LREFv1BB7vc4P46mjnMZtXYx1n4LrStvYdzWL7wyPw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiRoute}}/type",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNjA4MDc5MTMyLCJleHAiOjE2MDkzNzUxMzJ9.9rjooShsbwsnEWLtgG1jrvtxVSaR7M7l3ocAhFepAv82LREFv1BB7vc4P46mjnMZtXYx1n4LrStvYdzWL7wyPw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiRoute}}/type/1",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"type",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit type",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZW1haWwuY29tIiwiaWF0IjoxNjA4MDc5MTMyLCJleHAiOjE2MDkzNzUxMzJ9.9rjooShsbwsnEWLtgG1jrvtxVSaR7M7l3ocAhFepAv82LREFv1BB7vc4P46mjnMZtXYx1n4LrStvYdzWL7wyPw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"First Type\",\n    \"iconType\":\"exmaple Edited\",\n    \"iconName\":\"example\"\n}"
+						},
+						"url": {
+							"raw": "{{apiRoute}}/type/1",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"type",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete type",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiRoute}}/type/1",
+							"host": [
+								"{{apiRoute}}"
+							],
+							"path": [
+								"type",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im11c0BlbWFpbC5jb20iLCJpYXQiOjE1NTcxNDI1MjksImV4cCI6MTU1Nzc0NzMyOX0.ZdSMhvFkA7wJ2yzJI1SQTLng9-iIrWBgP8GVWyJ7c5mvpk8-CpG3_RoVUG2HAILrGqZhz66a7bKNLwxcd9B6yg",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "bcd4566f-7368-48a1-b8ac-9349ebda981a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "69723d31-7696-4626-9268-0038c6432dec",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "228d659b-d66f-4cb0-980c-9071bdcb4a76",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a277d2d9-d8ad-4578-8bce-1bd7e8f84b52",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "00a82a72-903a-4ad7-8af9-a3f25f30a5ea",
+			"key": "apiRoute",
+			"value": "localhost:3000/api",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

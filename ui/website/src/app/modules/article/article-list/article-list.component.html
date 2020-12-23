@@ -1,0 +1,77 @@
+<section class="page" style="padding: 1rem">
+  <div class="card-with-header">
+    <nz-page-header>
+      <nz-page-header-title>Articles</nz-page-header-title>
+    </nz-page-header>
+
+    <div class="card-with-header-content">
+      <div *ngIf="articleList$ | async as list">
+        <nz-list nzItemLayout="vertical" [nzPagination]="pagination">
+          <ng-template #emptyListTemplate>
+            <nz-list [nzDataSource]="[]"></nz-list>
+          </ng-template>
+          <ng-container *ngIf="list && list.length; else emptyListTemplate">
+            <nz-skeleton *ngFor="let article of list" [nzActive]="true" [nzLoading]="article.loading">
+              <nz-list-item
+                [nzContent]="contentItem"
+                [nzActions]="[viewAction, likeAction, msgAction]"
+                [nzExtra]="extra"
+              >
+                <ng-template #contentItem>
+                  <p style="max-height: 65px; overflow: hidden; text-overflow: ellipsis;">
+                    <app-display-article
+                      [compact]="true"
+                      [blocks]="parseBody(article.body).blocks"
+                    ></app-display-article>
+                  </p>
+                </ng-template>
+                <ng-template #viewAction>
+                  <i nz-icon type="eye-o" style="margin-right: 8px;"></i> {{ article.views }}
+                </ng-template>
+                <ng-template #likeAction>
+                  <i nz-icon type="heart-o" style="margin-right: 8px;"></i> {{ article.claps }}
+                </ng-template>
+                <ng-template #msgAction>
+                  <i nz-icon type="message" style="margin-right: 8px;"></i>
+                  {{ article.comments?.length }}
+                </ng-template>
+                <nz-list-item-meta
+                  [nzTitle]="title"
+                  [nzAvatar]="article.author?.avatar || 'assets/images/user.png'"
+                  [nzDescription]="desc"
+                >
+                  <ng-template #title>
+                    <a [routerLink]="['read', article.id]">{{ article.title }}</a>
+                  </ng-template>
+                  <ng-template #desc>
+                    {{ article.author?.firstname }} {{ article.author?.lastname }} —
+                    {{ article.createdAt | date }}
+                  </ng-template>
+                </nz-list-item-meta>
+                <ng-template #extra>
+                  <img
+                    style="display: none"
+                    width="270"
+                    alt="logo"
+                    src="https://i1.wp.com/thefrontline.org.uk/wp-content/uploads/2018/10/placeholder.jpg?ssl=1"
+                  />
+                </ng-template>
+              </nz-list-item>
+            </nz-skeleton>
+          </ng-container>
+
+          <ng-template #pagination>
+            <nz-pagination
+              *ngIf="list && list.length"
+              [nzPageIndex]="page"
+              [nzPageSize]="take"
+              [nzTotal]="max$ | async"
+              (nzPageIndexChange)="changePage($event)"
+            >
+            </nz-pagination>
+          </ng-template>
+        </nz-list>
+      </div>
+    </div>
+  </div>
+</section>
