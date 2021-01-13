@@ -31,7 +31,7 @@ services:
             - /src/app/node_modules
         command: expo start
         env_file:
-            - ./app/.env
+            - ./ui/app/.env
         networks:
             - network-recipes-book
     
