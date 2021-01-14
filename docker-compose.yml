@@ -18,39 +18,39 @@ services:
         networks:
             - network-recipes-book
 
-    app:
-        build: 
-            context: ./ui/app
-            dockerfile: Dockerfile
-        depends_on:
-            - domain
-        ports:
-            - "19000:19000"        
-        volumes:
-            - ./app/:/src/app/
-            - /src/app/node_modules
-        command: expo start
-        env_file:
-            - ./ui/app/.env
-        networks:
-            - network-recipes-book
-    
-        # website:
+    # app:
     #     build: 
-    #         context: ./ui/website
+    #         context: ./ui/app
     #         dockerfile: Dockerfile
     #     depends_on:
     #         - domain
     #     ports:
-    #         - "4200:4200"        
+    #         - "19000:19000"        
     #     volumes:
-    #         - ./website/:/src/website/
-    #         - /src/website/node_modules
-    #     command: yarn start:dev 
+    #         - ./app/:/src/app/
+    #         - /src/app/node_modules
+    #     command: expo start
     #     env_file:
-    #         - ./website/.env
+    #         - ./ui/app/.env
     #     networks:
     #         - network-recipes-book
+    
+    website:
+        build: 
+            context: ./ui/website
+            dockerfile: Dockerfile
+        depends_on:
+            - domain
+        ports:
+            - "8000:8000"        
+        volumes:
+            - ./ui/website/:/src/website/
+            - /src/website/node_modules
+        command: npm run dev 
+        env_file:
+            - ./ui/website/.env
+        networks:
+            - network-recipes-book
 
     postgres:
         image: postgres:10.4
